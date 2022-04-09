@@ -1,1 +1,2 @@
-# Aplicatii-Web-pentru-Baze-de-Date
+# Online Skincare Shop built using Spring Boot
+
