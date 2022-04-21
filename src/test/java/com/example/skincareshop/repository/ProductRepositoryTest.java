@@ -55,17 +55,20 @@ public class ProductRepositoryTest {
     @Test
     @Order(3)
     public void updateProduct() {
-        productRepository.updateProduct(Long.valueOf(27), "Test Product", 70.0, Long.valueOf(50), Long.valueOf(3));
         Product product = productRepository.findProductByName("Test Product");
-        assertTrue(product.getPrice() == 70.0);
+        product.setPrice(70.0);
+        productRepository.updateProduct(product.getId(), product.getName(), product.getPrice(), product.getQuantity(), product.getSupplier().getId());
+        Product updatedProduct = productRepository.findProductByName("Test Product");
+        assertTrue(updatedProduct.getPrice() == 70.0);
     }
 
     @Test
     @Order(4)
     public void deleteProduct() {
-        productRepository.deleteProduct(Long.valueOf(27));
         Product product = productRepository.findProductByName("Test Product");
-        assertTrue(product == null);
+        productRepository.deleteProduct(product.getId());
+        Product deletedProduct = productRepository.findProductByName("Test Product");
+        assertTrue(deletedProduct == null);
     }
 
     @Test
