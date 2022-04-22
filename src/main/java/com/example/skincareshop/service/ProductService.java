@@ -28,11 +28,18 @@ public class ProductService {
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream().map(p -> productMapper.mapToDto(p)).collect(Collectors.toList());
-
     }
 
     public ProductDto getOne(String Name) {
         Optional<Product> product = Optional.ofNullable(productRepository.findProductByName(Name));
+        if (product.isEmpty()) {
+            throw new ProductNotFoundException("This product does not exist");
+        }
+        return productMapper.mapToDto(product.get());
+    }
+
+    public ProductDto getById(Long id) {
+        Optional<Product> product = Optional.ofNullable(productRepository.findProductById(id));
         if (product.isEmpty()) {
             throw new ProductNotFoundException("This product does not exist");
         }

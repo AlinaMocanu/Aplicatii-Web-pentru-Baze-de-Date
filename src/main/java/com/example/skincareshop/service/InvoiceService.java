@@ -6,9 +6,14 @@ import com.example.skincareshop.exception.InvoiceNotFoundException;
 import com.example.skincareshop.mapper.InvoiceMapper;
 import com.example.skincareshop.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class InvoiceService {
@@ -27,5 +32,13 @@ public class InvoiceService {
         }
 
         return invoiceMapper.mapToDto(invoice.get());
+    }
+
+    public List<InvoiceDto> getAllByTotalPriceDesc() {
+        PageRequest sortedByTotalPriceDesc = PageRequest.of(0, 3, Sort.by("totalPrice").descending());
+        Page<Invoice> allInvoicesSorted = invoiceRepository.findAll(sortedByTotalPriceDesc);
+
+        return allInvoicesSorted.getContent().stream().map(i -> invoiceMapper.mapToDto(i)).collect(Collectors.toList());
+
     }
 }

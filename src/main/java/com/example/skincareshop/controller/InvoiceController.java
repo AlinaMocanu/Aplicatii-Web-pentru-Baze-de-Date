@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/invoices")
 public class InvoiceController {
@@ -20,5 +22,12 @@ public class InvoiceController {
         return ResponseEntity
                 .ok()
                 .body(invoiceService.getInvoiceWithOrder(id));
+    }
+
+    @GetMapping("/sorted-by-price")
+    public ResponseEntity<List<InvoiceDto>> getSortedInvoices() {
+        return ResponseEntity
+                .ok()
+                .body(invoiceService.getAllByTotalPriceDesc());
     }
 }

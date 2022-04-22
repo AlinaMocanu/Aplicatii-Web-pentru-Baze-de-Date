@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Info</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.0/css/bootstrap.min.css"/>
+    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<body>
+<div class="container" style="margin-top: 50px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-4">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="background-color:lightgray;">
+                        <h1 class="panel-title" th:text="${product.name}">Product</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p>price:</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p th:text="${product.price != null ?(product.price):'price'}">price</p>
+                            </div>
+                            <div class="col-md-2">
+                                <p>quantity:</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div th:text="${product.quantity != null ? product.quantity:' '}">quantity</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <p>supplier name:</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div th:text="${product.supplierName != null ? product.supplierName:' '}">supplier name</div>
+                            </div>
+                            <div class="col-md-2">
+                                <p>supplier city:</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div th:text="${product.city != null ? product.city:' '}">supplier city</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
